@@ -1,30 +1,30 @@
-#include <iostream>
-
-typedef char ElemType;
-#define MaxSize 60
-using namespace std;
-
-#pragma once
-
-class SqList
-{
-private:
-	ElemType data[MaxSize];
-	int length;
-public:
-	void CreatList_Sq(SqList*& L, ElemType a[], int n);
-	void InitList_Sq(SqList *&L);
-	bool ListInsert_Sq(SqList *&L, int i, ElemType e);
-	void ListTraverse_Sq(SqList*& L);
-	bool ListEmpty_Sq(SqList* L);
-	int ListLength_Sq(SqList* L);
-
-	int LocateElem_Sq(SqList* L, ElemType e);
-
-	bool ListDelete_Sq(SqList*& L, int i, ElemType& e);
-	void DestroyList_Sq(SqList*& L);
-
-};
+//#include <iostream>
+//
+//typedef char ElemType;
+//#define MaxSize 60
+//using namespace std;
+//
+//#pragma once
+//
+//class SqList
+//{
+//private:
+//	ElemType data[MaxSize];
+//	int length;
+//public:
+//	void CreatList_Sq(SqList*& L, ElemType a[], int n);
+//	void InitList_Sq(SqList *&L);
+//	bool ListInsert_Sq(SqList *&L, int i, ElemType e);
+//	void ListTraverse_Sq(SqList*& L);
+//	bool ListEmpty_Sq(SqList* L);
+//	int ListLength_Sq(SqList* L);
+//
+//	int LocateElem_Sq(SqList* L, ElemType e);
+//
+//	bool ListDelete_Sq(SqList*& L, int i, ElemType& e);
+//	void DestroyList_Sq(SqList*& L);
+//
+//};
 
 //1.编写一个程序，实现顺序表的各种基本运算，本实验的顺序表元素的类型为char，在主函数中调用顺序表的基本操作完成如下操作:
 //（1）初始化顺序表L

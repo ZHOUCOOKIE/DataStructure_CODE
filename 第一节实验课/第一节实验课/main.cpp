@@ -1,4 +1,4 @@
-
+#define _CRT_SECURE_NO_WARNINGS 1
 //1.编写一个程序，实现顺序表的各种基本运算，本实验的顺序表元素的类型为char，在主函数中调用顺序表的基本操作完成如下操作:
 //（1）初始化顺序表L
 //（2）依次在顺序表L的尾部插入a、b、c、d、e等5个字符
@@ -143,3 +143,42 @@
 //{
 //	free(L);
 //}
+
+#include<stdio.h>
+#define maxsize 60
+
+typedef struct {
+	int date[maxsize];
+	int length;
+}sqList;
+
+void ListDelete_Sq(sqList*& L, int x, int y) {
+	int i = 0, j;
+	if (i < L->length && (L->date[i]<x || (L->date[i])>y))
+		i++;
+	else
+	{
+		for (j = i + 1; j < L->length; j++)
+		{
+			L->date[j] = L->date[j + 1];
+			L->length--;
+		}
+	}
+}
+
+int main()
+{
+	sqList* list;
+	int a, b, i, j;
+	for (i = 0; i < maxsize; i++)
+	{
+		scanf("%d", list->date[i]);
+	}
+	scanf("%d %d", &a, &b);
+	ListDelete_Sq(list, a, b);
+	for (j = 0; j < list->length; j++)
+	{
+		printf("%d ", list->date[j]);
+	}
+
+}
