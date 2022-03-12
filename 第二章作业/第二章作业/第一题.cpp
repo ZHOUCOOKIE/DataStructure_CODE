@@ -12,7 +12,7 @@ int main()
 	ListInsert_Sq(L, 4, 4);
 	printf("输出顺序表L:");
 	ListTraverse_Sq(L);
-	printf("\n输出顺序表L的长度:%d\n", ListLength_Sq(L));
+	printf("输出顺序表L的长度:%d\n", ListLength_Sq(L));
 	printf("输出元素2的逻辑位置:");
 	Listlocate_Sq(L, 2);
 	printf("在第5个元素位置上插入元素5\n");

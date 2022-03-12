@@ -48,7 +48,7 @@ void ListTraverse_Sq(SqList*& L)
 {
 	int i = 0;
 	for (i = 0; i < L->length; i++)
-		printf("%d", L->data[i]);
+		printf("%d ", L->data[i]);
 	printf("\n");
 }
 
