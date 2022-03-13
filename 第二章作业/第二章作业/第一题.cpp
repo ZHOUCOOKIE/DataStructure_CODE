@@ -1,31 +1,100 @@
-//¼ÆËã»ú215°à 202110244532 ÖÜ¿¡°²
-#include "SqList.h"
+ï»¿//è®¡ç®—æœº215ç­ 202110244532 å‘¨ä¿Šå®‰
+#include <stdio.h>
+#include <stdlib.h>
+#define MaxSize 10
+typedef int ElemType;
+
+typedef struct {
+	ElemType data[MaxSize];
+	int length;
+}SqList;
+
+void InitList_Sq(SqList*& L)
+{
+	L = (SqList*)malloc(sizeof(SqList));
+	L->length = 0;
+}
+
+bool ListInsert_Sq(SqList*& L, int i, ElemType e)
+{
+	int j;
+	if (L->length == MaxSize)return false;
+	i--;
+	for (j = L->length; j > i; j--)
+		L->data[j] = L->data[j - 1];
+	L->data[i] = e;
+	L->length++;
+	return true;
+}
+
+void ListTraverse_Sq(SqList*& L)
+{
+	int i = 0;
+	for (i = 0; i < L->length; i++)
+		printf("%d ", L->data[i]);
+	printf("\n");
+}
+
+bool ListDelete_Sq(SqList*& L, int i, ElemType& e)
+{
+	int j;
+	if ((i < 1) || (i > L->length))
+		return false;
+	i--;
+	e = L->data[i];
+	L->data[i] = 0;
+	for (j = i; j < L->length - 1; j++)
+		L->data[j] = L->data[j + 1];
+	L->length--;
+	return true;
+}
+
+void DestroyList_Sq(SqList*& L)
+{
+	free(L);
+}
+
+int ListLength_Sq(SqList* L)
+{
+	return(L->length);
+}
+
+
+int LocateElem_Sq(SqList* L, ElemType e)
+{
+	int i = 0;
+	while (i < L->length && L->data[i] != e)
+		i++;
+	if (i < L->length)
+		return i + 1;
+	else
+		return 0;
+}
+
 int main()
 {
 	ElemType e;
 	SqList* L;
-	printf("³õÊ¼»¯Ë³Ğò±íL\n");
+	printf("åˆå§‹åŒ–é¡ºåºè¡¨L\n");
 	InitList_Sq(L);
-	printf("ÒÀ´Î²åÈë1£¬2£¬3£¬4\n");
+	printf("ä¾æ¬¡æ’å…¥1ï¼Œ2ï¼Œ3ï¼Œ4\n");
 	ListInsert_Sq(L, 1, 1);
 	ListInsert_Sq(L, 2, 2);
 	ListInsert_Sq(L, 3, 3);
 	ListInsert_Sq(L, 4, 4);
-	printf("Êä³öË³Ğò±íL:");
+	printf("è¾“å‡ºé¡ºåºè¡¨L:");
 	ListTraverse_Sq(L);
-	printf("Êä³öË³Ğò±íLµÄ³¤¶È:%d\n", ListLength_Sq(L));
-	printf("Êä³öÔªËØ2µÄÂß¼­Î»ÖÃ:");
-	Listlocate_Sq(L, 2);
-	printf("ÔÚµÚ5¸öÔªËØÎ»ÖÃÉÏ²åÈëÔªËØ5\n");
+	printf("è¾“å‡ºé¡ºåºè¡¨Lçš„é•¿åº¦:%d\n", ListLength_Sq(L));
+	printf("è¾“å‡ºå…ƒç´ 2çš„é€»è¾‘ä½ç½®:%d\n", LocateElem_Sq(L, 2));
+	printf("åœ¨ç¬¬5ä¸ªå…ƒç´ ä½ç½®ä¸Šæ’å…¥å…ƒç´ 5\n");
 	ListInsert_Sq(L, 5, 5);
-	printf("Êä³öË³Ğò±íL:");
+	printf("è¾“å‡ºé¡ºåºè¡¨L:");
 	ListTraverse_Sq(L);
-	printf("É¾³ıLµÄµÚ3¸öÔªËØ\n");
+	printf("åˆ é™¤Lçš„ç¬¬3ä¸ªå…ƒç´ \n");
 	ListDelete_Sq(L, 3,e);
-	printf("Êä³öË³Ğò±íL:");
+	printf("è¾“å‡ºé¡ºåºè¡¨L:");
 	ListTraverse_Sq(L);
-	printf("ÊÍ·ÅË³Ğò±íL");
+	printf("é‡Šæ”¾é¡ºåºè¡¨L");
 	DestroyList_Sq(L);
 	return 0;
 }
-

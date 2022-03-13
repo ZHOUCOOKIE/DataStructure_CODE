@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MaxSize 5
+#define MaxSize 6
 typedef char ElemType;
 
 typedef struct {
@@ -16,6 +16,7 @@ int ListLength_Sq(SqList* L);
 int LocateElem_Sq(SqList* L, ElemType e);
 bool ListDelete_Sq(SqList*& L, int i, ElemType& e);
 void DestroyList_Sq(SqList*& L);
-void Listabc_Sq(SqList*& L, int i);
+void Listlocate_Sq(SqList*& L, int i);
 void Listbubble_sort(SqList*& L, int Maxsize);
-void IntersectionList_Sq(SqList*& La, SqList*& Lb, SqList*& Lc);
+void InterSection(SqList*& La, SqList*& Lb, SqList*& Lc);
+void CreatList_Sq(SqList*& L, ElemType a[], int n);
