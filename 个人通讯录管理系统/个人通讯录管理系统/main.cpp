@@ -25,27 +25,30 @@ int main()
 		switch (input)
 		{
 		case PRINT:
-			PrintPlus(L1,L2);
+			PrintPlus(L1, L2);
 			break;
 		case SEARCH:
+			Search(L2);
 			break;
 		case ADD:
-			Add(L1);
+			Add(L1,L2);
 			break;
 		case MODIFY:
+			Modify(L2);
 			break;
 		case DELETE:
-			Delete(L1);
+			Delete(L1, L2);
 			break;
 		case SAVE:
 			Save(L1);
 			L1 = NULL;
 			break;
 		case NOSAVE:
-			NoSave(L1);
+			NoSave(L1,L2);
 			break;
 		case EXIT:
 			Destroy(L1);
+			Destroy(L2);
 			break;
 		default:
 			printf(" ‰»Î¥ÌŒÛ£°");
