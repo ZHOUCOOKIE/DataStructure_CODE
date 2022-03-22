@@ -15,39 +15,44 @@ void Menu()//已完成
 void PrintPlus(Contact*& L1, Contact*& L2)//已完成
 {
 	Fread(L2);
-	Print(L2);
+	if (L2 == NULL)
+	{
+		return;
+	}
+	else
+	{
+		Print(L2);
+	}
+
 	if (L1 == NULL)
 	{
 		printf("无未保存的通讯录！\n");
 		return;
 	}
-	printf("以下为未保存的通讯录信息：\n");
-	Contact* p = L1->Next;
+	else
+	{
+		printf("以下为未保存的通讯录信息：\n");
+		Print(L1);
+	}
+	//Contact* p = L1->Next;
+	//while (p->Next != NULL)
+	//{
+	//	printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+	//	p = p->Next;
+	//}
+	//printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+}
+
+void Print(Contact*& L)//已完成
+{
+	Contact* p = L->Next;
+	printf("年龄  姓名  性别\t手机号码\tQQ号码\t工作单位\t邮箱\n");
 	while (p->Next != NULL)
 	{
 		printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 		p = p->Next;
 	}
 	printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-}
-
-void Print(Contact*& L)//已完成
-{
-	if (L == NULL)
-	{
-		return;
-	}
-	else
-	{
-		Contact* p = L->Next;
-		printf("年龄  姓名  性别\t手机号码\tQQ号码\t工作单位\t邮箱\n");
-		while (p->Next != NULL)
-		{
-			printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-			p = p->Next;
-		}
-		printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-	}
 }
 
 void Search(Contact*& L2)//已完成
@@ -57,6 +62,10 @@ void Search(Contact*& L2)//已完成
 	if (L2 == NULL)
 	{
 		Fread(L2);
+		if (L2 == NULL)
+		{
+			return;
+		}
 	}
 	Contact* p = L2->Next;
 	while (1)
@@ -234,6 +243,10 @@ void Modify(Contact*& L2)//已完成
 	if (L2 == NULL)
 	{
 		Fread(L2);
+		if (L2 = NULL)
+		{
+			return;
+		}
 	}
 	switch (modify)
 	{
@@ -331,6 +344,10 @@ void Modify(Contact*& L2)//已完成
 		if (L2 == NULL)
 		{
 			Fread(L2);
+			if (L2 == NULL)
+			{
+				return;
+			}
 		}
 		Contact* p = L2->Next;
 		while (1)
@@ -634,7 +651,6 @@ void Modify(Contact*& L2)//已完成
 		printf("修改完成！\n");
 		break;
 	}
-	
 }
 
 void Delete(Contact*& L1, Contact*& L2)//已完成
@@ -682,6 +698,11 @@ void Delete(Contact*& L1, Contact*& L2)//已完成
 			return;
 		}
 		p = L2->Next;
+		if (p = NULL)
+		{
+			printf("操作失败！");
+			break;
+		}
 		while (p->Next != NULL)
 		{
 			fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
@@ -730,7 +751,6 @@ void Delete(Contact*& L1, Contact*& L2)//已完成
 		remove("contact.txt");
 		Destroy(L2);
 		printf("您已经成功删除原通讯录文件内容\n");
-		L2 = NULL;
 		break;
 	}
 }
@@ -764,14 +784,12 @@ void Save(Contact*& L1)//已实现
 		fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 		fclose(fp);
 		Destroy(L1);
-		L1 = NULL;
 	}
 	else if (2 == judge)
 	{
 		Destroy(L1);
-		L1 = NULL;
 	}
-	else if (0)
+	else if (0==judge)
 	{
 		return;
 	}
@@ -781,8 +799,6 @@ void NoSave(Contact*& L1, Contact*& L2)//已实现
 {
 	Destroy(L1);
 	Destroy(L2);
-	L1 = NULL;
-	L2 = NULL;
 	printf("操作成功！\n");
 }
 
@@ -800,6 +816,7 @@ void Destroy(Contact*& L)//销毁链表L，释放链表L占用的内存空间。
 		p = pre->Next;
 	}
 	free(pre);
+	L = NULL;
 }
 
 void Fread(Contact*& L2)//已完成

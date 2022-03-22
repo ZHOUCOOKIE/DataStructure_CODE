@@ -41,7 +41,6 @@ int main()
 			break;
 		case SAVE:
 			Save(L1);
-			L1 = NULL;
 			break;
 		case NOSAVE:
 			NoSave(L1,L2);
