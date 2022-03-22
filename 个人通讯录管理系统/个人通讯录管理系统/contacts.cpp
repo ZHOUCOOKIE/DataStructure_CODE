@@ -18,7 +18,7 @@ void PrintPlus(Contact*& L1, Contact*& L2)//已完成
 	Print(L2);
 	if (L1 == NULL)
 	{
-		printf("无未保存的通讯录\n");
+		printf("无未保存的通讯录！\n");
 		return;
 	}
 	printf("以下为未保存的通讯录信息：\n");
@@ -31,7 +31,7 @@ void PrintPlus(Contact*& L1, Contact*& L2)//已完成
 	printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 }
 
-void Print(Contact*& L)//已完成 改逆序打印
+void Print(Contact*& L)//已完成
 {
 	if (L == NULL)
 	{
@@ -175,7 +175,7 @@ void Search(Contact*& L2)//已完成
 
 void Add(Contact*& L1, Contact*& L2)//已完成
 {
-	Contact* s,*p=L2->Next;
+	Contact* s, * p = L2,*r;
 	int i = 0;
 	L1 = (Contact*)calloc(1, sizeof(Contact));
 	if (L1 == NULL)
@@ -183,7 +183,7 @@ void Add(Contact*& L1, Contact*& L2)//已完成
 		printf("申请内存失败！");
 		return;
 	}
-	L1->Next = NULL;
+	r = L1;
 	printf("请输入需要添加多少位联系人：");
 	scanf("%d", &i);
 	for (; i > 0; i--)
@@ -195,29 +195,35 @@ void Add(Contact*& L1, Contact*& L2)//已完成
 			printf("申请内存失败！");
 			return;
 		}
-		scanf("%d %s %s %s %lld %s %s", &s->age,s->Name, s->Sex, s->PhNum, &s->QQNuM, s->ComP, s->Email);
-		char name[MAX_NAME];
-		strcpy(name, s->Name);
-		while (p->Next != NULL)
+		scanf("%d %s %s %s %lld %s %s", &s->age, s->Name, s->Sex, s->PhNum, &s->QQNuM, s->ComP, s->Email);
+
+		if (L2 != NULL)
 		{
-			if (strcmp(p->Name, name) == 0)
-			{
-				break;
-			}
-			p = p->Next;
-		}
-		while(strcmp(p->Name, name) == 0)
-		{
-			printf("您输入的联系人存在重名请修改后在输入！\n");
-			printf("请重新输入信息：(年龄 姓名 性别 手机号码 QQ号码 工作单位 邮箱)");
-			scanf("%d %s %s %s %lld %s %s", &s->age, s->Name, s->Sex, s->PhNum, &s->QQNuM, s->ComP, s->Email);
+			p = L2->Next;
+			char name[MAX_NAME];
 			strcpy(name, s->Name);
+			while (p->Next != NULL)
+			{
+				if (strcmp(p->Name, name) == 0)
+				{
+					break;
+				}
+				p = p->Next;
+			}
+			while (strcmp(p->Name, name) == 0)
+			{
+				printf("您输入的联系人存在重名请修改后在输入！\n");
+				printf("请重新输入信息：(年龄 姓名 性别 手机号码 QQ号码 工作单位 邮箱)");
+				scanf("%d %s %s %s %lld %s %s", &s->age, s->Name, s->Sex, s->PhNum, &s->QQNuM, s->ComP, s->Email);
+				strcpy(name, s->Name);
+			}
 		}
 		//18 周俊安 男 13242825240 2117289243 仲恺农业工程学院 zhoucookie@outlook.com
 		//19 周俊 男 1324282520 21172892 仲恺农业工程院 zhoucookie@outlk.com
-		s->Next = L1->Next;
-		L1->Next = s;
+		r->Next = s;
+		r = s;
 	}
+	r->Next = NULL;
 }
 
 void Modify(Contact*& L2)//已完成
@@ -246,7 +252,7 @@ void Modify(Contact*& L2)//已完成
 		}
 		while (1)
 		{
-			printf("是否继续此行修改？（0、是 1、否）\n");
+			printf("是否继续此行修改？（0、否 1、是）\n");
 			scanf("%d", &interrupt);
 			if (interrupt == 0)
 			{
@@ -299,6 +305,7 @@ void Modify(Contact*& L2)//已完成
 				strcpy(p->Email, email);
 				break;
 			}
+		}
 			FILE* fp;
 			fp = fopen("contact.txt", "w");
 			if (fp == NULL)
@@ -315,7 +322,7 @@ void Modify(Contact*& L2)//已完成
 			fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 			fclose(fp);
 			printf("修改完成！\n");
-		}
+		
 		break;
 	}
 	case 2:
@@ -721,7 +728,9 @@ void Delete(Contact*& L1, Contact*& L2)//已完成
 	break;
 	case 3:
 		remove("contact.txt");
+		Destroy(L2);
 		printf("您已经成功删除原通讯录文件内容\n");
+		L2 = NULL;
 		break;
 	}
 }
@@ -755,10 +764,12 @@ void Save(Contact*& L1)//已实现
 		fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 		fclose(fp);
 		Destroy(L1);
+		L1 = NULL;
 	}
 	else if (2 == judge)
 	{
 		Destroy(L1);
+		L1 = NULL;
 	}
 	else if (0)
 	{
@@ -770,7 +781,9 @@ void NoSave(Contact*& L1, Contact*& L2)//已实现
 {
 	Destroy(L1);
 	Destroy(L2);
-	printf("退出成功！\n");
+	L1 = NULL;
+	L2 = NULL;
+	printf("操作成功！\n");
 }
 
 void Destroy(Contact*& L)//销毁链表L，释放链表L占用的内存空间。
@@ -796,7 +809,7 @@ void Fread(Contact*& L2)//已完成
 	fp = fopen("contact.txt", "rt");
 	if (fp == NULL)
 	{
-		printf("文件不存在！\n");
+		printf("无已保存通讯录！\n");
 		return;
 	}
 	L2 = (Contact*)calloc(1, sizeof(Contact));
@@ -805,7 +818,6 @@ void Fread(Contact*& L2)//已完成
 		printf("申请内存失败！\n");
 		return;
 	}
-	L2->Next = NULL;
 	p = L2;
 	while (!feof(fp))
 	{
@@ -816,8 +828,10 @@ void Fread(Contact*& L2)//已完成
 			return;
 		}
 		fscanf(fp, "%d %s %s %s %lld %s %s\n", &s->age, s->Name, s->Sex, s->PhNum, &s->QQNuM, s->ComP, s->Email);
-		s->Next = p->Next;
 		p->Next = s;
+		p = s;
 	}
+	p->Next = NULL;
+
 	fclose(fp);
 }
