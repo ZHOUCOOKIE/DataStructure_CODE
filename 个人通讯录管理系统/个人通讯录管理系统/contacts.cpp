@@ -4,25 +4,19 @@
 #include <string.h>
 void Menu()//已完成
 {
-	printf("--------------------个人通讯录管理系统----------------------------\n");
-	printf("----------0、显示所有通讯录--------1、查找通讯录------------------\n");
-	printf("----------2、添加通讯录成员--------3、修改通讯录成员信息----------\n");
-	printf("----------4、删除通讯录成员信息----5、保存------------------------\n");
-	printf("----------6、不保存----------------7、退出程序--------------------\n");
-	printf("------------------------------------------------------------------\n");
+	printf("--------------------------------------------个人通讯录管理系统------------------------------------------\n");
+	printf("---------------------------------0、显示所有通讯录--------1、查找通讯录---------------------------------\n");
+	printf("---------------------------------2、添加通讯录成员--------3、修改通讯录成员信息-------------------------\n");
+	printf("---------------------------------4、删除通讯录成员信息----5、保存---------------------------------------\n");
+	printf("---------------------------------6、不保存----------------7、退出程序-----------------------------------\n");
+	printf("--------------------------------------------------------------------------------------------------------\n");
 }
 
 void PrintPlus(Contact*& L1, Contact*& L2)//已完成
 {
 	Fread(L2);
-	if (L2 == NULL)
-	{
-		return;
-	}
-	else
-	{
+	if (L2 != NULL)
 		Print(L2);
-	}
 
 	if (L1 == NULL)
 	{
@@ -34,25 +28,18 @@ void PrintPlus(Contact*& L1, Contact*& L2)//已完成
 		printf("以下为未保存的通讯录信息：\n");
 		Print(L1);
 	}
-	//Contact* p = L1->Next;
-	//while (p->Next != NULL)
-	//{
-	//	printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-	//	p = p->Next;
-	//}
-	//printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 }
 
 void Print(Contact*& L)//已完成
 {
 	Contact* p = L->Next;
-	printf("年龄  姓名  性别\t手机号码\tQQ号码\t工作单位\t邮箱\n");
+	printf("  年龄  姓名     性别\t 手机号码      QQ号码\t      工作单位\t               邮箱\n");
 	while (p->Next != NULL)
 	{
-		printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+		printf(" %4d  %-10s %-5s %10s  %-12lld %-20s %-30s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 		p = p->Next;
 	}
-	printf("%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+	printf(" %4d  %-10s %-5s %10s   %-12lld %-20s %-30s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 }
 
 void Search(Contact*& L2)//已完成
@@ -67,9 +54,9 @@ void Search(Contact*& L2)//已完成
 			return;
 		}
 	}
-	Contact* p = L2->Next;
 	while (1)
 	{
+		Contact* p = L2->Next;
 		printf("是否取消查找？（Y/N）\n");
 		getchar();
 		scanf("%c", &judge);
@@ -698,7 +685,7 @@ void Delete(Contact*& L1, Contact*& L2)//已完成
 			return;
 		}
 		p = L2->Next;
-		if (p = NULL)
+		if (p == NULL)
 		{
 			printf("操作失败！");
 			break;
