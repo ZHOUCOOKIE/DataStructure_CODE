@@ -1,11 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "contacts.h"
 #include <stdio.h>
+#include <stdlib.h>
 enum Option
 {
 	PRINT,
 	SEARCH,
 	ADD,
+	SORT,
 	MODIFY,
 	DELETE,
 	SAVE,
@@ -32,27 +34,37 @@ int main()
 			break;
 		case ADD:
 			Add(L1,L2);
+			system("cls");
+			break;
+		case SORT:
+			Sort(L2);
+			system("cls");
 			break;
 		case MODIFY:
 			Modify(L2);
+			system("cls");
 			break;
 		case DELETE:
 			Delete(L1, L2);
+			system("cls");
 			break;
 		case SAVE:
 			Save(L1);
+			system("cls");
 			break;
 		case NOSAVE:
 			NoSave(L1,L2);
+			system("cls");
 			break;
 		case EXIT:
 			Destroy(L1);
 			Destroy(L2);
+			system("cls");
 			break;
 		default:
-			printf(" ‰»Î¥ÌŒÛ£°");
+			printf(" ‰»Î¥ÌŒÛ£°\n");
 			break;
 		}
-	} while (input != 7);
+	} while (input != 8);
 	return 0;
 }

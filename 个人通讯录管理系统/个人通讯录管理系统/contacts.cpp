@@ -6,10 +6,10 @@ void Menu()//已完成
 {
 	printf("--------------------------------------------个人通讯录管理系统------------------------------------------\n");
 	printf("---------------------------------0、显示所有通讯录--------1、查找通讯录---------------------------------\n");
-	printf("---------------------------------2、添加通讯录成员--------3、修改通讯录成员信息-------------------------\n");
-	printf("---------------------------------4、删除通讯录成员信息----5、保存---------------------------------------\n");
-	printf("---------------------------------6、不保存----------------7、退出程序-----------------------------------\n");
-	printf("--------------------------------------------------------------------------------------------------------\n");
+	printf("---------------------------------2、添加通讯录成员--------3、按姓名排序联系人---------------------------\n");
+	printf("---------------------------------4、修改通讯录成员信息----5、删除通讯录成员信息-------------------------\n");
+	printf("---------------------------------6、保存------------------7、不保存-------------------------------------\n");
+	printf("----------------------------------------------8 、退出程序----------------------------------------------\n");
 }
 
 void PrintPlus(Contact*& L1, Contact*& L2)//已完成
@@ -32,6 +32,8 @@ void PrintPlus(Contact*& L1, Contact*& L2)//已完成
 
 void Print(Contact*& L)//已完成
 {
+	if (L == NULL)
+		return;
 	Contact* p = L->Next;
 	printf("  年龄  姓名     性别\t 手机号码      QQ号码\t      工作单位\t               邮箱\n");
 	while (p->Next != NULL)
@@ -171,7 +173,7 @@ void Search(Contact*& L2)//已完成
 
 void Add(Contact*& L1, Contact*& L2)//已完成
 {
-	Contact* s, * p = L2,*r;
+	Contact* s, * p = L2, * r;
 	int i = 0;
 	L1 = (Contact*)calloc(1, sizeof(Contact));
 	if (L1 == NULL)
@@ -230,7 +232,7 @@ void Modify(Contact*& L2)//已完成
 	if (L2 == NULL)
 	{
 		Fread(L2);
-		if (L2 = NULL)
+		if (L2 == NULL)
 		{
 			return;
 		}
@@ -306,23 +308,23 @@ void Modify(Contact*& L2)//已完成
 				break;
 			}
 		}
-			FILE* fp;
-			fp = fopen("contact.txt", "w");
-			if (fp == NULL)
-			{
-				printf("无法打开文件或无法创建文件！");
-				return;
-			}
-			p = L2->Next;
-			while (p->Next != NULL)
-			{
-				fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-				p = p->Next;
-			}
+		FILE* fp;
+		fp = fopen("contact.txt", "w");
+		if (fp == NULL)
+		{
+			printf("无法打开文件或无法创建文件！");
+			return;
+		}
+		p = L2->Next;
+		while (p->Next != NULL)
+		{
 			fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-			fclose(fp);
-			printf("修改完成！\n");
-		
+			p = p->Next;
+		}
+		fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+		fclose(fp);
+		printf("修改完成！\n");
+
 		break;
 	}
 	case 2:
@@ -687,7 +689,7 @@ void Delete(Contact*& L1, Contact*& L2)//已完成
 		p = L2->Next;
 		if (p == NULL)
 		{
-			printf("操作失败！");
+			printf("操作失败！\n");
 			break;
 		}
 		while (p->Next != NULL)
@@ -776,7 +778,7 @@ void Save(Contact*& L1)//已实现
 	{
 		Destroy(L1);
 	}
-	else if (0==judge)
+	else if (0 == judge)
 	{
 		return;
 	}
@@ -838,4 +840,71 @@ void Fread(Contact*& L2)//已完成
 	p->Next = NULL;
 
 	fclose(fp);
+}
+
+void Sort(Contact*& L2)
+{
+	Fread(L2);
+	Contact* q = L2->Next, * p = q->Next;
+	int temp0;
+	char temp1[MAX_NAME];
+	char temp2[MAX_SEX];
+	char temp3[MAX_PHNUM];
+	long long temp4;//使用字符数组打印的时候会出bug
+	char temp5[MAX_COMP];
+	char temp6[MAX_EMAIL];
+	while (q != NULL)
+	{
+		p = q->Next;
+		while (p != NULL)
+		{
+			if (strcmp(q->Name, p->Name) > 0)
+			{
+				temp0 = q->age;
+				q->age = p->age;
+				p->age = temp0;
+				strcpy(temp1, q->Name);
+				strcpy(q->Name, p->Name);
+				strcpy(p->Name, temp1);
+
+				strcpy(temp2, q->Sex);
+				strcpy(q->Sex, p->Sex);
+				strcpy(p->Sex, temp2);
+
+				strcpy(temp3, q->PhNum);
+				strcpy(q->PhNum, p->PhNum);
+				strcpy(p->PhNum, temp3);
+
+				temp4 = q->QQNuM;
+				q->QQNuM = p->QQNuM;
+				p->QQNuM = temp4;
+
+				strcpy(temp5, q->ComP);
+				strcpy(q->ComP, p->ComP);
+				strcpy(p->ComP, temp5);
+
+				strcpy(temp6, q->Email);
+				strcpy(q->Email, p->Email);
+				strcpy(p->Email, temp6);
+			}
+			p = p->Next;
+		}
+		q = q->Next;
+	}
+	FILE* fp;
+	fp = fopen("contact.txt", "w");
+	if (fp == NULL)
+	{
+		printf("无法打开文件或无法创建文件！");
+		return;
+	}
+	p = L2->Next;
+	while (p->Next != NULL)
+	{
+		fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+		p = p->Next;
+	}
+	fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+	fclose(fp);
+	printf("排序成功！\n");
 }

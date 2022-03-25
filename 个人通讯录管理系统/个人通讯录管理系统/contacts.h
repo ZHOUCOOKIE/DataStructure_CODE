@@ -30,3 +30,4 @@ void Save(Contact*& L);
 void NoSave(Contact*& L1, Contact*& L2);
 void Destroy(Contact*& L);
 void Fread(Contact*& L2);
+void Sort(Contact*& L2);
