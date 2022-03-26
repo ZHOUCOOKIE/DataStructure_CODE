@@ -30,38 +30,42 @@ int main()
 			PrintPlus(L1, L2);
 			break;
 		case SEARCH:
+			system("cls");
 			Search(L2);
+			system("cls");
 			break;
 		case ADD:
-			Add(L1,L2);
 			system("cls");
+			Add(L1,L2);
 			break;
 		case SORT:
-			Sort(L2);
 			system("cls");
+			Sort(L2);
 			break;
 		case MODIFY:
-			Modify(L2);
 			system("cls");
+			Modify(L2);
 			break;
 		case DELETE:
-			Delete(L1, L2);
 			system("cls");
+			Delete(L1, L2);
 			break;
 		case SAVE:
-			Save(L1);
 			system("cls");
+			Save(L1);
 			break;
 		case NOSAVE:
-			NoSave(L1,L2);
 			system("cls");
+			NoSave(L1,L2);
 			break;
 		case EXIT:
+			system("cls");
 			Destroy(L1);
 			Destroy(L2);
-			system("cls");
+			printf("退出成功！");
 			break;
 		default:
+			system("cls");
 			printf("输入错误！\n");
 			break;
 		}

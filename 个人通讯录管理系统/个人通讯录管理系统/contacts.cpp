@@ -14,6 +14,7 @@ void Menu()//已完成
 
 void PrintPlus(Contact*& L1, Contact*& L2)//已完成
 {
+	system("cls");
 	Fread(L2);
 	if (L2 != NULL)
 		Print(L2);
@@ -46,6 +47,7 @@ void Print(Contact*& L)//已完成
 
 void Search(Contact*& L2)//已完成
 {
+	system("cls");
 	int search = 0;
 	char judge;
 	if (L2 == NULL)
@@ -130,24 +132,33 @@ void Search(Contact*& L2)//已完成
 		}
 		break;
 		case 4:
+		{
 			char comp[MAX_COMP];
+			int i = 0;
 			printf("请输入要查找的单位：");
 			scanf("%s", comp);
 			while (p->Next != NULL)
 			{
 				if (strcmp(p->ComP, comp) == 0)
 				{
-					break;
+					printf("单位为%s的通讯录信息：%d %s %s %s %lld %s %s\n", p->ComP, p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+					i++;
 				}
 				p = p->Next;
 			}
-			if (strcmp(p->ComP, comp) != 0)
+			if (strcmp(p->ComP, comp) == 0)
 			{
+				printf("单位为%s的通讯录信息：%d %s %s %s %lld %s %s\n", p->ComP, p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+				i++;
+			}
+			if (i == 0)
+			{
+				system("cls");
 				printf("未找到联系人！\n");
 				break;
 			}
-			printf("单位为%s的通讯录信息：%d %s %s %s %lld %s %s\n", p->ComP, p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 			break;
+		}
 		case 5:
 			char email[MAX_EMAIL];
 			printf("请输入要查找的邮箱：");
@@ -178,7 +189,7 @@ void Add(Contact*& L1, Contact*& L2)//已完成
 	L1 = (Contact*)calloc(1, sizeof(Contact));
 	if (L1 == NULL)
 	{
-		printf("申请内存失败！");
+		printf("申请内存失败！\n");
 		return;
 	}
 	r = L1;
@@ -190,7 +201,7 @@ void Add(Contact*& L1, Contact*& L2)//已完成
 		s = (Contact*)calloc(1, sizeof(Contact));
 		if (s == NULL)
 		{
-			printf("申请内存失败！");
+			printf("申请内存失败！\n");
 			return;
 		}
 		scanf("%d %s %s %s %lld %s %s", &s->age, s->Name, s->Sex, s->PhNum, &s->QQNuM, s->ComP, s->Email);
@@ -217,11 +228,14 @@ void Add(Contact*& L1, Contact*& L2)//已完成
 			}
 		}
 		//18 周俊安 男 13242825240 2117289243 仲恺农业工程学院 zhoucookie@outlook.com
-		//19 周俊 男 1324282520 21172892 仲恺农业工程院 zhoucookie@outlk.com
+		//19 小明   男 13242825000 2111000011 仲恺农业工程学院 2117289243@qq.com
+		//22 老王   女 10086100000 2324347832 仲恺农业工程学院 438473289@abc.com
 		r->Next = s;
 		r = s;
 	}
 	r->Next = NULL;
+	system("cls");
+	printf("操作成功，可按6保存操作或者继续完成其他操作！\n");
 }
 
 void Modify(Contact*& L2)//已完成
@@ -323,8 +337,8 @@ void Modify(Contact*& L2)//已完成
 		}
 		fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 		fclose(fp);
+		system("cls");
 		printf("修改完成！\n");
-
 		break;
 	}
 	case 2:
