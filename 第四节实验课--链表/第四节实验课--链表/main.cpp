@@ -10,6 +10,11 @@
 ////（10）删除单链表h的第3个元素
 ////（11）输出单链表h
 ////（12）释放单链表h
+//（1）使用实验2 - 1已完成的单链表的设计LinkList.cpp；
+//（2）按实验要求编写删除算法
+//算法提示 : deletes(LinkList * L, int min, int max).算法提示：从链表中找到第一个大于min的值，从该位置往后再找到第一个大于max的值，重新完成指针链接，从而实现删除。
+
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
@@ -31,22 +36,17 @@ int main()
 {
 	ElemType e;
 	Linklist* L;
-	DuLinkList* DL;
 	ElemType a[] = "abcde";
 
 	printf("依次插入a、b、c、d、e\n");
 	CreatList_Sq(L, a, 5);
 	printf("输出链表L:");
 	ListTraverse_Sq(L);
-	printf("删除a - c");
+	printf("删除a - d");
 	deletes(L, 'a', 'd');
 	printf("输出链表L:");
 	ListTraverse_Sq(L);
 	printf("释放链表L\n");
 	DestroyList_Sq(L);
-	CreateListF_DuL(DL, a, 5);
-	PrintList_DuL(DL);
-	invertSort(DL);
-	PrintList_DuL(DL);
 	return 0;
 }
