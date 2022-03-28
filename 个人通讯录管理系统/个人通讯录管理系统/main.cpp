@@ -2,18 +2,6 @@
 #include "contacts.h"
 #include <stdio.h>
 #include <stdlib.h>
-enum Option
-{
-	PRINT,
-	SEARCH,
-	ADD,
-	SORT,
-	MODIFY,
-	DELETE,
-	SAVE,
-	NOSAVE,
-	EXIT
-};
 
 int main()
 {
@@ -26,39 +14,38 @@ int main()
 		scanf("%d", &input);
 		switch (input)
 		{
-		case PRINT:
+		case 0:
 			PrintPlus(L1, L2);
 			break;
-		case SEARCH:
+		case 1:
 			system("cls");
 			Search(L2);
-			system("cls");
 			break;
-		case ADD:
+		case 2:
 			system("cls");
 			Add(L1,L2);
 			break;
-		case SORT:
+		case 3:
 			system("cls");
 			Sort(L2);
 			break;
-		case MODIFY:
+		case 4:
 			system("cls");
 			Modify(L2);
 			break;
-		case DELETE:
+		case 5:
 			system("cls");
 			Delete(L1, L2);
 			break;
-		case SAVE:
+		case 6:
 			system("cls");
 			Save(L1);
 			break;
-		case NOSAVE:
+		case 7:
 			system("cls");
 			NoSave(L1,L2);
 			break;
-		case EXIT:
+		case 8:
 			system("cls");
 			Destroy(L1);
 			Destroy(L2);
