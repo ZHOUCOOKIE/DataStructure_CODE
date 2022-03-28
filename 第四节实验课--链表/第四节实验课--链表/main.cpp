@@ -31,17 +31,22 @@ int main()
 {
 	ElemType e;
 	Linklist* L;
+	DuLinkList* DL;
 	ElemType a[] = "abcde";
 
 	printf("依次插入a、b、c、d、e\n");
 	CreatList_Sq(L, a, 5);
 	printf("输出链表L:");
 	ListTraverse_Sq(L);
-	printf("删除a - d");
+	printf("删除a - c");
 	deletes(L, 'a', 'd');
 	printf("输出链表L:");
 	ListTraverse_Sq(L);
 	printf("释放链表L\n");
 	DestroyList_Sq(L);
+	CreateListF_DuL(DL, a, 5);
+	PrintList_DuL(DL);
+	invertSort(DL);
+	PrintList_DuL(DL);
 	return 0;
 }
