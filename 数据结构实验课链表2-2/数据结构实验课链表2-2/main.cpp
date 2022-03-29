@@ -14,6 +14,7 @@ void main()
 	printf("在第二个位置插入刚刚删除的元素：");
 	ListLnsert_DuL(L, 2, e);
 	PrintList_DuL(L);
+	DestroyList_DuL(L);
 	printf("逆置双链表");
 	invertSort(L,  a, 5);
 	PrintList_DuL(L);

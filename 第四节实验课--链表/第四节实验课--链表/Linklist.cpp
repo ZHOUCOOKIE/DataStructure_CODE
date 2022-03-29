@@ -46,16 +46,16 @@ void CreatList_Sq(Linklist*& L, ElemType a[], int n)//尾插法创建链表
 	r->next = NULL;
 }
 
-void InitList_Sq(Linklist*& L)//初始化线性表，构造一个空的链表L。
-{
-	L = (Linklist*)malloc(sizeof(Linklist));
-	if (L == NULL)
-	{
-		printf("内存分配不成功！\n");
-		return;
-	}
-	L->next = NULL;
-}
+//void InitList_Sq(Linklist*& L)//初始化线性表，构造一个空的链表L。
+//{
+//	L = (Linklist*)malloc(sizeof(Linklist));
+//	if (L == NULL)
+//	{
+//		printf("内存分配不成功！\n");
+//		return;
+//	}
+//	L->next = NULL;
+//}
 
 bool ListInsert_Sq(Linklist*& L, int i, ElemType e)//插入元素
 {
