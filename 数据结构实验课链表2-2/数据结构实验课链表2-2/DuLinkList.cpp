@@ -102,15 +102,3 @@ bool ListLnsert_DuL(DuLinkList*& L, int i, ElemType e)
 		return true;
 	}
 }
-
-void DestroyList_DuL(DuLinkList*& L)//销毁链表L，释放链表L占用的内存空间。
-{
-	DuLinkList* pre = L, * p = L->next;
-	while (p != NULL)
-	{
-		free(pre);
-		pre = p;
-		p = pre->next;
-	}
-	free(pre);
-}
