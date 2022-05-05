@@ -33,27 +33,6 @@ void CreateBiTree(BTNode*& T, char* str)
 	}
 }
 
-//BTNode * FindNode(BTNode * BT, char X)
-//{
-//	char ch;
-//	ch = X;
-//	if (BT)
-//	{
-//		if ((BT->lchild != NULL && BT->lchild->data == ch) || (BT->rchild != NULL && BT->rchild->data == ch))
-//		{
-//			printf("%c的结点的孩子结点值为%c", BT->data, ch);
-//
-//		}
-//		if ((BT->lchild != NULL && BT->lchild->data != ch) || (BT->rchild != NULL && BT->rchild->data != ch))
-//		{
-//
-//			FindNode(BT->lchild, ch);
-//			FindNode(BT->rchild, ch);
-//		}
-//	}
-//	return BT;
-//}
-
 BTNode* FindParent(BTNode* ptr, Elemtype child)
 {
 	if (ptr == nullptr ||  ptr->data == child)
@@ -84,3 +63,24 @@ BTNode* Parent(BTNode* ptr, Elemtype child)
 		}
 	}
 }
+
+//BTNode * FindNode(BTNode * BT, char X)
+//{
+//	char ch;
+//	ch = X;
+//	if (BT)
+//	{
+//		if ((BT->lchild != NULL && BT->lchild->data == ch) || (BT->rchild != NULL && BT->rchild->data == ch))
+//		{
+//			printf("%c的结点的孩子结点值为%c", BT->data, ch);
+//
+//		}
+//		if ((BT->lchild != NULL && BT->lchild->data != ch) || (BT->rchild != NULL && BT->rchild->data != ch))
+//		{
+//
+//			FindNode(BT->lchild, ch);
+//			FindNode(BT->rchild, ch);
+//		}
+//	}
+//	return BT;
+//}
