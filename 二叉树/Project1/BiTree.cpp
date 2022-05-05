@@ -84,3 +84,4 @@ BTNode* Parent(BTNode* ptr, Elemtype child)
 //	}
 //	return BT;
 //}
+
