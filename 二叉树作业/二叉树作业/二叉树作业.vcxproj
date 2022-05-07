@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{39772321-4b1c-4a7e-8bfa-7067d22cbc90}</ProjectGuid>
-    <RootNamespace>求二叉树中最大结点的值</RootNamespace>
+    <ProjectGuid>{e1132e90-8278-43d6-a3e0-a0ee6c60e204}</ProjectGuid>
+    <RootNamespace>二叉树作业</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BiTree.h" />
+    <ClCompile Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\计算机215_32_周俊安_5\源代码\BiTree.cpp" />
+    <ClCompile Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\计算机215_32_周俊安_5\源代码\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BiTree.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClInclude Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\计算机215_32_周俊安_5\源代码\BiTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
