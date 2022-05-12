@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\BiTree.cpp" />
+    <ClCompile Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\BiTree.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -138,13 +145,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\计算机215_32_周俊安_5\源代码\BiTree.cpp" />
-    <ClCompile Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\计算机215_32_周俊安_5\源代码\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\计算机215_32_周俊安_5\源代码\BiTree.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

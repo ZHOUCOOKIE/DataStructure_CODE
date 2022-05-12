@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\计算机215_32_周俊安_5\源代码\BiTree.cpp">
+    <ClCompile Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\BiTree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\计算机215_32_周俊安_5\源代码\main.cpp">
+    <ClCompile Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\计算机215_32_周俊安_5\源代码\BiTree.h">
+    <ClInclude Include="..\..\..\..\Users\ZHOUIULAPTOP\OneDrive\桌面\BiTree.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
