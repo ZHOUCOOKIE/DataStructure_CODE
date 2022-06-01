@@ -1,13 +1,12 @@
+//计算机215 202110244532 周俊安
 #include "ALGraph.h"
-
-
 bool CreateMGraph(MGraph*& G, int A[][7], char B[7])
 {
 	int i, j;
 	G = (MGraph*)malloc(sizeof(MGraph));
 	if (!G)return false;
-	G->n = 7;
-	G->e = 11;
+	G->n = 5;
+	G->e = 16;
 	for (i = 0; i < G->n; i++)
 		G->vexs[i].no = B[i];
 	for (i = 0; i < G->n; i++)
