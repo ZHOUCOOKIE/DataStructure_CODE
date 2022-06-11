@@ -4,7 +4,7 @@
 #include<stdio.h>
 #define MAXV 100
 #define INF 36727
-int visited[MAXV];
+//int visited[MAXV];
 
 typedef int InfoType;
 typedef struct {
