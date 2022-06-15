@@ -1,45 +1,42 @@
-//邻接矩阵
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdlib.h>
 #include<stdio.h>
-#define MAXV 100
-#define INF 36727
-//int visited[MAXV];
 
+#define MAXV 50
+#define INF 32767
 typedef int InfoType;
 typedef struct {
-	int no;
+	char no;
 	InfoType info;
 }VertexType;
 
-typedef struct {
+typedef struct MGraph {
+	VertexType vexs[MAXV];
 	int edges[MAXV][MAXV];
 	int n, e;
-	VertexType vexs[MAXV];
 }MGraph;
-//邻接表
-typedef struct ANode
-{
+
+typedef char VerType;
+typedef struct ANode {
 	int adjvex;
 	struct ANode* nextarc;
 	InfoType info;
-}ArcNode;
-
+}ANode;
 typedef struct VNode {
-	InfoType data;
-	ArcNode* firstarc;
+	VerType no;
+	struct ANode* firstarc;
 }VNode;
-
-typedef VNode AdjList[MAXV];
 typedef struct {
-	AdjList adjlist;
+	VNode adjlist[MAXV];
 	int n, e;
 }ALGraph;
+static int visited[MAXV];
 
-void Print(MGraph* G);
-bool CreateMGraph(MGraph*& G, int A[][6], char B[6]);
-//void CreateALGraph(ALGraph*& G);
-void MatToList(MGraph* g, ALGraph*& G);
-void DFS(ALGraph* G, int v);//深度优先
-void BFS(ALGraph* G, int v);
-void DispAdj(ALGraph* G);
+void PrintAMG(MGraph* G);//输出邻接矩阵G
+void PrintALG(ALGraph* G);//输出邻接表G
+int InDegreeM(MGraph* G, int v);//邻接矩阵求入度
+int InDegreeL(ALGraph* G, int v);//邻接表求顶点入度
+void LDFS(ALGraph* G, int v);//深度优先搜索 邻接表
+void LBFS(ALGraph* G, int v);//广度优先搜索 邻接表
+void MDFS(MGraph* G, int v);//深度优先搜索 邻接矩阵
+void MBFS(MGraph* G, int v);//广度优先搜索 邻接矩阵
