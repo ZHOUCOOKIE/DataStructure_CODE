@@ -12,15 +12,15 @@ void Menu()
 	printf("----------------------------------------------8 、退出程序----------------------------------------------\n");
 }
 
-void PrintPlus(Contact*& L1, Contact*& L2)
+void display(Contact*& L1, Contact*& L2)
 {
 	system("cls");//清屏函数
-	Fread(L2);
-	if (L2 != NULL)
-		Print(L2);
+	if (L2 == NULL)
+		load(L2);
+	Print(L2);
 	if (L1 == NULL)
 	{
-		printf("无未保存的通讯录！\n");
+		printf("无还未保存的新增联系人信息！\n");
 		return;
 	}
 	else
@@ -36,22 +36,23 @@ void Print(Contact*& L)
 		return;
 	Contact* p = L->Next;
 	printf("  年龄  姓名     性别\t 手机号码      QQ号码\t      工作单位\t               邮箱\n");
-	while (p->Next != NULL)
+	while (p != NULL && p->Next != NULL)
 	{
 		printf(" %4d  %-10s %-5s %10s  %-12lld %-20s %-30s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 		p = p->Next;
 	}
-	printf(" %4d  %-10s %-5s %10s   %-12lld %-20s %-30s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+	if(p != NULL)
+		printf(" %4d  %-10s %-5s %10s  %-12lld %-20s %-30s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
 }
 
-void Search(Contact*& L2)
+void search(Contact*& L2)
 {
 	system("cls");
 	int search = 0;
 	char judge;
 	if (L2 == NULL)
 	{
-		Fread(L2);
+		load(L2);
 		if (L2 == NULL)
 		{
 			return;
@@ -181,11 +182,11 @@ void Search(Contact*& L2)
 	}
 }
 
-void Add(Contact*& L1, Contact*& L2)
+void enter(Contact*& L1, Contact*& L2)
 {
 	if (L2 == NULL)
 	{
-		Fread(L2);
+		load(L2);
 	}
 	Contact* s, * p = L2, * r;
 	int i = 0;
@@ -210,24 +211,28 @@ void Add(Contact*& L1, Contact*& L2)
 			return;
 		}
 		scanf("%d %s %s %s %lld %s %s", &s->age, s->Name, s->Sex, s->PhNum, &s->QQNuM, s->ComP, s->Email);
-		p = L2->Next;
-		char name[MAX_NAME];
-		strcpy(name, s->Name);
-		while (p->Next != NULL)
+		if (L2 != NULL)
 		{
-			if (strcmp(p->Name, name) == 0)//防止重名
-			{
-				break;
-			}
-			p = p->Next;
-		}
-		while (strcmp(p->Name, name) == 0)
-		{
-			printf("您输入的联系人存在重名请修改后在输入！\n");
-			printf("请重新输入信息：(年龄 姓名 性别 手机号码 QQ号码 工作单位 邮箱)");
-			scanf("%d %s %s %s %lld %s %s", &s->age, s->Name, s->Sex, s->PhNum, &s->QQNuM, s->ComP, s->Email);
+			p = L2->Next;
+			char name[MAX_NAME];
 			strcpy(name, s->Name);
+			while (p->Next != NULL)
+			{
+				if (strcmp(p->Name, name) == 0)//防止重名
+				{
+					break;
+				}
+				p = p->Next;
+			}
+			while (strcmp(p->Name, name) == 0)
+			{
+				printf("您输入的联系人存在重名请修改后在输入！\n");
+				printf("请重新输入信息：(年龄 姓名 性别 手机号码 QQ号码 工作单位 邮箱)");
+				scanf("%d %s %s %s %lld %s %s", &s->age, s->Name, s->Sex, s->PhNum, &s->QQNuM, s->ComP, s->Email);
+				strcpy(name, s->Name);
+			}
 		}
+
 		r->Next = s;
 		r = s;
 	}
@@ -243,7 +248,7 @@ void Modify(Contact*& L2)
 	scanf("%d", &modify);
 	if (L2 == NULL)
 	{
-		Fread(L2);
+		load(L2);
 		if (L2 == NULL)
 		{
 			return;
@@ -320,21 +325,6 @@ void Modify(Contact*& L2)
 				break;
 			}
 		}
-		FILE* fp;
-		fp = fopen("contact.txt", "w"); //“w”方式打开，为了覆盖原来的文件内容
-		if (fp == NULL)
-		{
-			printf("无法打开文件或无法创建文件！");
-			return;
-		}
-		p = L2->Next;
-		while (p->Next != NULL)
-		{
-			fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-			p = p->Next;
-		}
-		fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-		fclose(fp);
 		system("cls");
 		printf("修改完成！\n");
 		break;
@@ -344,7 +334,7 @@ void Modify(Contact*& L2)
 		char judge;
 		if (L2 == NULL)
 		{
-			Fread(L2);
+			load(L2);
 			if (L2 == NULL)
 			{
 				return;
@@ -634,22 +624,7 @@ void Modify(Contact*& L2)
 				break;
 			}
 		}
-		FILE* fp;
-		fp = fopen("contact.txt", "w");//“w”方式打开，为了覆盖原来的文件内容
-		if (fp == NULL)
-		{
-			printf("无法打开文件或无法创建文件！");
-			return;
-		}
-		p = L2->Next;
-		while (p->Next != NULL)
-		{
-			fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-			p = p->Next;
-		}
-		fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-		fclose(fp);
-		printf("修改完成！\n");
+		printf("修改后请保存！\n");
 		break;
 	}
 }
@@ -665,7 +640,7 @@ void Delete(Contact*& L1, Contact*& L2)
 	{
 		if (L2 == NULL)
 		{
-			Fread(L2);
+			load(L2);
 		}
 		Print(L2);
 		printf("请选择删除第几行的联系人:");
@@ -690,27 +665,7 @@ void Delete(Contact*& L1, Contact*& L2)
 			p->Next = q->Next;
 			free(q);
 		}
-		FILE* fp;
-		fp = fopen("contact.txt", "w");
-		if (fp == NULL)
-		{
-			printf("无法打开文件或无法创建文件！");
-			return;
-		}
-		p = L2->Next;
-		if (p == NULL)
-		{
-			printf("操作失败！\n");
-			break;
-		}
-		while (p->Next != NULL)//保存到文件中
-		{
-			fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-			p = p->Next;
-		}
-		fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
-		fclose(fp);
-		printf("删除完成！\n");
+		printf("操作成功，可按6保存操作或者继续完成其他操作！\n");
 	}
 	break;
 	case 2:
@@ -746,7 +701,7 @@ void Delete(Contact*& L1, Contact*& L2)
 		}
 		if (L1->Next == NULL)
 		{
-			L1 == NULL;
+			L1 = NULL;
 		}
 		printf("删除完成！\n");
 	}
@@ -759,25 +714,48 @@ void Delete(Contact*& L1, Contact*& L2)
 	}
 }
 
-void Save(Contact*& L1)
+void save(Contact*& L1, Contact*& L2)
 {
 	int  judge;
+	FILE* fp;
+	printf("是否保存对原通讯录的修改？(是1/否2/取消操作0)\n");
+	scanf("%d", &judge);
+	if (1 == judge)
+	{
+		Contact* p = L2->Next;
+		fp = fopen("contact.txt", "w");
+		if (fp == NULL)
+		{
+			printf("\n无法打开文件或无法创建文件！");
+			return;
+		}
+		while (p->Next != NULL)
+		{
+			fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+			p = p->Next;
+		}
+		fprintf(fp, "%d %s %s %s %lld %s %s\n", p->age, p->Name, p->Sex, p->PhNum, p->QQNuM, p->ComP, p->Email);
+		fclose(fp);
+	}
+	else if (2 == judge)
+	{
+		Destroy(L2);
+	}
 	if (L1 == NULL)
 	{
-		printf("没有需要保存的内容！\n");
+		printf("无新增的联系人信息！\n");
 		return;
 	}
-	printf("确认将下列的信息存入文件中吗？(是1/否2/取消操作0)\n");
+	printf("\n是否将下列的信息添加入通讯录中？(是1/否2/取消操作0)\n");
 	Print(L1);
 	scanf("%d", &judge);
 	if (1 == judge)
 	{
-		FILE* fp;
 		Contact* p = L1->Next;
 		fp = fopen("contact.txt", "at");
 		if (fp == NULL)
 		{
-			printf("无法打开文件或无法创建文件！");
+			printf("\n无法打开文件或无法创建文件！");
 			return;
 		}
 		while (p->Next != NULL)
@@ -823,7 +801,7 @@ void Destroy(Contact*& L)//删除单链表
 	L = NULL;
 }
 
-void Fread(Contact*& L2)//读取文本文件中的内容并保存到单链表L2中
+void load(Contact*& L2)//读取文本文件中的内容并保存到单链表L2中
 {
 	FILE* fp;
 	Contact* p, * s;
@@ -861,7 +839,7 @@ void Sort(Contact*& L2)
 {
 	if (L2 == NULL)
 	{
-		Fread(L2);
+		load(L2);
 	}
 	Contact* q = L2->Next, * p = q->Next;
 	//创建中间变量

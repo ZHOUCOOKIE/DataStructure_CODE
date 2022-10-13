@@ -6,24 +6,28 @@
 int main()
 {
 	Contact* L1 = NULL, * L2 = NULL;
-	int input = 0;
+	int input = 0, test;
 	do
 	{
 		Menu();
 		printf("请选择功能：");
-		scanf("%d", &input);
+		test = scanf("%d", &input);
+		if (!test)
+		{
+			goto out;
+		}
 		switch (input)
 		{
 		case 0:
-			PrintPlus(L1, L2);
+			display(L1, L2);
 			break;
 		case 1:
 			system("cls");
-			Search(L2);
+			search(L2);
 			break;
 		case 2:
 			system("cls");
-			Add(L1,L2);
+			enter(L1, L2);
 			break;
 		case 3:
 			system("cls");
@@ -39,11 +43,11 @@ int main()
 			break;
 		case 6:
 			system("cls");
-			Save(L1);
+			save(L1, L2);
 			break;
 		case 7:
 			system("cls");
-			NoSave(L1,L2);
+			NoSave(L1, L2);
 			break;
 		case 8:
 			system("cls");
@@ -56,6 +60,13 @@ int main()
 			printf("输入错误！\n");
 			break;
 		}
+	out:
+		int ch;
+		while ((ch = getchar()) != EOF && ch != '\n')
+		{
+			printf("处理错误中请稍等...");
+			system("cls");
+		};
 	} while (input != 8);
 	return 0;
 }
