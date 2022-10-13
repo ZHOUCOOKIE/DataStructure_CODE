@@ -6,28 +6,27 @@
 typedef int InfoType;
 typedef struct
 {
-	int no;
-	InfoType info;
+	int no;//顶点编号
+	InfoType info;//顶点其他信息
 }VertexType;
 typedef struct
 {
-	int edges[MAXV][MAXV];
-	int n, e;
-	VertexType vexs[MAXV];
+	int edges[MAXV][MAXV];//邻接矩阵
+	int n, e;//顶点数和弧数
+	VertexType vexs[MAXV];//存放顶点信息
 }MGraph;
 typedef struct
 {
-	int u;
-	int v;
-	int w;
+	int u;//边的起始顶点
+	int v;//边的终止顶点
+	int w;//边的权值
 }Edge;
 
-void PrintAMG(MGraph* G);
-void Prim(MGraph* G, int v);
-void Kruskal(MGraph* g);
-void InsertSort(Edge E[], int n);
-void Dispath(MGraph* g, int dist[], int path[], int s[], int v);
-void Dijkstra(MGraph* g, int v);
+void Prim(MGraph* G, int v);//Prim算法
+void Kruskal(MGraph* g);//Kruskal算法
+void InsertSort(Edge E[], int n);//对E[0..n-1]按递增有序进行直接插入排序
+void Dispath(MGraph* g, int dist[], int path[], int s[], int v);//打印路径
+void Dijkstra(MGraph* g, int v);//狄克斯特拉算法
 
 int main()
 {
